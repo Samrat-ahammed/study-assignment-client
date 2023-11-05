@@ -13,88 +13,14 @@ const Card = () => {
         </figure>
         <div className="card-body">
           <h2 className="card-title">Assignment title</h2>
-          <p className="text-gray-700 font-semibold">Mark:20</p>
-          <p className="text-gray-500 font-semibold">Level:Hard</p>
-          <div className="card-actions justify-between">
-            <button className="btn badge-outline">Update</button>
-            <Link to={"assignmentDetails"} className="btn badge-outline">
-              View
-            </Link>
+          <div className="flex justify-between mb-4">
+            {" "}
+            <p className="text-gray-500 font-semibold">Level:Hard</p>
+            <p className="text-gray-700 font-semibold badge badge-secondary badge-outline">
+              Mark:20
+            </p>
           </div>
-        </div>
-      </div>
-      <div className="card card-compact bg-base-100 shadow-xl">
-        <figure>
-          <img
-            className="w-full"
-            src="https://i.ibb.co/9wrJqPf/download.jpg"
-            alt="Shoes"
-          />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">Assignment title</h2>
-          <p className="text-gray-700 font-semibold">Mark:20</p>
-          <p className="text-gray-500 font-semibold">Level:Hard</p>
-          <div className="card-actions justify-between">
-            <button className="btn badge-outline">Update</button>
-            <Link to={"assignmentDetails"} className="btn badge-outline">
-              View
-            </Link>
-          </div>
-        </div>
-      </div>
-      <div className="card card-compact bg-base-100 shadow-xl">
-        <figure>
-          <img
-            className="w-full"
-            src="https://i.ibb.co/9wrJqPf/download.jpg"
-            alt="Shoes"
-          />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">Assignment title</h2>
-          <p className="text-gray-700 font-semibold">Mark:20</p>
-          <p className="text-gray-500 font-semibold">Level:Hard</p>
-          <div className="card-actions justify-between">
-            <button className="btn badge-outline">Update</button>
-            <Link to={"assignmentDetails"} className="btn badge-outline">
-              View
-            </Link>
-          </div>
-        </div>
-      </div>
-      <div className="card card-compact bg-base-100 shadow-xl">
-        <figure>
-          <img
-            className="w-full"
-            src="https://i.ibb.co/9wrJqPf/download.jpg"
-            alt="Shoes"
-          />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">Assignment title</h2>
-          <p className="text-gray-700 font-semibold">Mark:20</p>
-          <p className="text-gray-500 font-semibold">Level:Hard</p>
-          <div className="card-actions justify-between">
-            <button className="btn badge-outline">Update</button>
-            <Link to={"assignmentDetails"} className="btn badge-outline">
-              View
-            </Link>
-          </div>
-        </div>
-      </div>
-      <div className="card card-compact bg-base-100 shadow-xl">
-        <figure>
-          <img
-            className="w-full"
-            src="https://i.ibb.co/9wrJqPf/download.jpg"
-            alt="Shoes"
-          />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">Assignment title</h2>
-          <p className="text-gray-700 font-semibold">Mark:20</p>
-          <p className="text-gray-500 font-semibold">Level:Hard</p>
+
           <div className="card-actions justify-between">
             <button className="btn badge-outline">Update</button>
             <Link to={"assignmentDetails"} className="btn badge-outline">
