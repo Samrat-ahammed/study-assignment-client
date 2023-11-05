@@ -11,7 +11,9 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <a>Item 1</a>
+        <NavLink to={"addAssignment"}>
+          <a>Add-Assignment</a>
+        </NavLink>
       </li>
       <li>
         <a>Item 1</a>

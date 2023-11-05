@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import registerLogo from "../assets/registerlogo.png";
+import { FcGoogle } from "react-icons/Fc";
 const RegisterPage = () => {
   return (
     <div className="flex">
@@ -9,8 +10,11 @@ const RegisterPage = () => {
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <form className="card-body w-full">
               <div className="form-control w-full">
-                {" "}
-                <h1 className="text-5xl font-bold">Register</h1>
+                <h1 className="text-5xl font-bold mb-6">Register</h1>
+                <div className="w-full border bordered btn badge-ghost px-2 py-3 rounded-lg flex justify-center items-center text-center">
+                  <FcGoogle></FcGoogle>
+                  <h3>Google Login</h3>
+                </div>
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
@@ -42,8 +46,8 @@ const RegisterPage = () => {
               </div>
               <div>
                 <h3>
-                  Already Have An Account
-                  <Link to={"login"} className="text-blue-800">
+                  Already Have An Account-
+                  <Link to={"/login"} className="text-blue-800">
                     Login
                   </Link>
                 </h3>

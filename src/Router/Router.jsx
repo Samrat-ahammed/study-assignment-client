@@ -3,6 +3,8 @@ import MainLayout from "../Layout/MainLayout";
 import HomePage from "../Page/HomePage";
 import LoginPage from "../Page/LoginPage";
 import RegisterPage from "../Page/RegisterPage";
+import AssignmentDetails from "../Page/AssignmentDetails";
+import AddAssignment from "../Page/AddAssignment";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +14,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage></HomePage>,
+      },
+      {
+        path: "assignmentDetails",
+        element: <AssignmentDetails></AssignmentDetails>,
+      },
+      {
+        path: "addAssignment",
+        element: <AddAssignment></AddAssignment>,
       },
     ],
   },

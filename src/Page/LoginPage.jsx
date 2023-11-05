@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import loginLogo from "../assets/loginLogo.jpg";
+
+import { FcGoogle } from "react-icons/Fc";
+
 const LoginPage = () => {
   return (
     <div className="flex">
@@ -9,8 +12,11 @@ const LoginPage = () => {
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <form className="card-body w-full">
               <div className="form-control w-full">
-                {" "}
-                <h1 className="text-5xl font-bold">Login</h1>
+                <h1 className="text-5xl font-bold mb-6">Login</h1>
+                <div className="w-full border bordered btn badge-ghost px-2 py-3 rounded-lg flex justify-center items-center text-center">
+                  <FcGoogle></FcGoogle>
+                  <h3>Google Login</h3>
+                </div>
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
@@ -42,7 +48,7 @@ const LoginPage = () => {
               </div>
               <div>
                 <h3>
-                  New Here Please
+                  New Here Please-
                   <Link to={"/register"} className="text-blue-800">
                     Register
                   </Link>

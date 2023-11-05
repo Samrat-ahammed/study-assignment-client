@@ -46,7 +46,7 @@ const HomeAbout = () => {
         </div>
       </div>
       <div className="w-1/2">
-        <img className="w-full" src={aboutImg} alt="" />
+        <img className="w-full rounded-md" src={aboutImg} alt="" />
       </div>
     </div>
   );
