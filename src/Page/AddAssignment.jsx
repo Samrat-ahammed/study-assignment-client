@@ -8,7 +8,7 @@ const AddAssignment = () => {
   return (
     <div className="mb-10 mt-10">
       <div className="bg-green-700 font-bold text-4xl p-4 text-white rounded-t-lg">
-        Add-Your Assignment
+        Create-Your Assignment
       </div>
       <div className="space-y-4 bg-green-200 p-12">
         <div className="flex gap-4">

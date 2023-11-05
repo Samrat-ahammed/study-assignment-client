@@ -7,6 +7,7 @@ import AssignmentDetails from "../Page/AssignmentDetails";
 import AddAssignment from "../Page/AddAssignment";
 import UpdateAssignment from "../Page/UpdateAssignment";
 import TakeAssignment from "../Page/TakeAssignment";
+import AllSubmit from "../Page/AllSubmit";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "takeAssignment",
         element: <TakeAssignment></TakeAssignment>,
+      },
+      {
+        path: "allSubmit",
+        element: <AllSubmit></AllSubmit>,
       },
     ],
   },

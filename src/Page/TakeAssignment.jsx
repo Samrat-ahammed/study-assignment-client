@@ -4,7 +4,6 @@ const TakeAssignment = () => {
     <div className="bg-green-100 p-12 rounded-md">
       <div className="overflow-x-auto shadow bg-white">
         <table className="table">
-          {/* head */}
           <thead>
             <tr>
               <th>
@@ -46,7 +45,7 @@ const TakeAssignment = () => {
               </td>
               <td>hard</td>
               <th>
-                <button className="btn btn-ghost btn-xs">confirm</button>
+                <button className="btn btn-ghost btn-xs">Delete</button>
               </th>
             </tr>
           </tbody>

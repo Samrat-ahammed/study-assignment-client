@@ -16,13 +16,13 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to={"updateAssignment"}>
-          <a>Update-Assignment</a>
+        <NavLink to={"allSubmit"}>
+          <a>submitted-assignments</a>
         </NavLink>
       </li>
       <li>
         <NavLink to={"takeAssignment"}>
-          <a>Your-Assignment</a>
+          <a>My-Assignment</a>
         </NavLink>
       </li>
 

@@ -22,7 +22,9 @@ const Card = () => {
           </div>
 
           <div className="card-actions justify-between">
-            <button className="btn badge-outline">Update</button>
+            <Link to={"updateAssignment"} className="btn badge-outline">
+              Update
+            </Link>
             <Link to={"assignmentDetails"} className="btn badge-outline">
               View
             </Link>
