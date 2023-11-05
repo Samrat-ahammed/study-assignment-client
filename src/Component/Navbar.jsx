@@ -17,7 +17,22 @@ const Navbar = () => {
         <a>Item 1</a>
       </li>
       <li>
-        <a>Item 1</a>
+        <NavLink to={"login"}>
+          <a>Login</a>
+        </NavLink>
+      </li>
+    </>
+  );
+  const profileNav = (
+    <>
+      <li>
+        <a>Samrat ahammmed</a>
+      </li>
+      <li>
+        <a>Samratahammmed@gmail.com</a>
+      </li>
+      <li>
+        <a>Login</a>
       </li>
     </>
   );
@@ -69,15 +84,7 @@ const Navbar = () => {
               tabIndex={0}
               className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box"
             >
-              <li>
-                <a>Samrat ahammmed</a>
-              </li>
-              <li>
-                <a>Samratahammmed@gmail.com</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
+              {profileNav}
             </ul>
           </div>
         </div>
