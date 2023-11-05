@@ -16,8 +16,16 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <a>Item 1</a>
+        <NavLink to={"updateAssignment"}>
+          <a>Update-Assignment</a>
+        </NavLink>
       </li>
+      <li>
+        <NavLink to={"takeAssignment"}>
+          <a>Your-Assignment</a>
+        </NavLink>
+      </li>
+
       <li>
         <NavLink to={"login"}>
           <a>Login</a>
@@ -75,7 +83,9 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal  gap-4  px-1">{navLink}</ul>
+          <ul className="menu menu-horizontal bg-green-200 rounded-lg  gap-4  px-1">
+            {navLink}
+          </ul>
         </div>
         <div className="navbar-end">
           <div className="dropdown dropdown-end">

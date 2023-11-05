@@ -1,14 +1,14 @@
-import { useState } from "react";
-import DatePicker from "react-datepicker";
-import { BiMessageSquareAdd } from "react-icons/Bi";
+import { RxUpdate } from "react-icons/Rx";
 import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+import { useState } from "react";
 
-const AddAssignment = () => {
+const UpdateAssignment = () => {
   const [startDate, setStartDate] = useState(new Date());
   return (
     <div className="mb-10 mt-10">
       <div className="bg-green-700 font-bold text-4xl p-4 text-white rounded-t-lg">
-        Add-Your Assignment
+        Update-Your Assignment
       </div>
       <div className="space-y-4 bg-green-200 p-12">
         <div className="flex gap-4">
@@ -64,8 +64,8 @@ const AddAssignment = () => {
       <div className="bg-green-700 text-center font-bold text-4xl p-4 text-white rounded-b-lg">
         <div className="">
           <button className="btn badge-outline">
-            <BiMessageSquareAdd></BiMessageSquareAdd>
-            Add assignment
+            <RxUpdate></RxUpdate>
+            Update assignment
           </button>
         </div>
       </div>
@@ -73,4 +73,4 @@ const AddAssignment = () => {
   );
 };
 
-export default AddAssignment;
+export default UpdateAssignment;
