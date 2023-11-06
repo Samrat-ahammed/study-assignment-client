@@ -80,6 +80,7 @@ const AddAssignment = () => {
           />
           <div className="w-1/2">
             <select
+              required
               onChange={(e) =>
                 setAssignment({ ...addAssignment, level: e?.target.value })
               }

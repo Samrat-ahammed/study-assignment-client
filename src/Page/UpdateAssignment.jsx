@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdateAssignment = () => {
   const assignment = useLoaderData();
@@ -21,7 +22,8 @@ const UpdateAssignment = () => {
     date: new Date(),
   });
 
-  const handleAddAssignment = () => {
+  const handleAddAssignment = (e) => {
+    e.preventDefault();
     fetch(`http://localhost:5000/allAssignment/${assignment._id}`, {
       method: "PUT",
       headers: {
@@ -33,20 +35,20 @@ const UpdateAssignment = () => {
       .then((data) => {
         console.log(data);
         if (data?.modifiedCount > 0) {
-          alert("user updated");
+          Swal.fire("Add your Assignment", "", "success");
         }
       });
   };
 
   useEffect(() => {
     if (assignment) {
-      setAssignment(assignment);
+      setAssignment({ ...assignment, date: new Date(assignment.date) });
     }
   }, [assignment]);
   return (
-    <div className="mb-10 mt-10">
+    <form onSubmit={handleAddAssignment} className="mb-10 mt-10">
       <div className="bg-green-700 font-bold text-4xl p-4 text-white rounded-t-lg">
-        Create-Your Assignment {addAssignment.date}
+        Create-Your Assignment
       </div>
       <div className="space-y-4 bg-green-200 p-12">
         <div className="flex gap-4">
@@ -60,8 +62,7 @@ const UpdateAssignment = () => {
           />
           <DatePicker
             className="input input-bordered w-full"
-            defaultValue={addAssignment?.date}
-            selected={addAssignment.date}
+            selected={addAssignment?.date}
             onChange={(date) => setAssignment({ ...addAssignment, date: date })}
           />
         </div>
@@ -78,6 +79,7 @@ const UpdateAssignment = () => {
             }
             className="input input-bordered w-1/2"
             placeholder="PhotoURL"
+            defaultValue={assignment.imgUrl}
             type="text"
           />
         </div>
@@ -88,6 +90,7 @@ const UpdateAssignment = () => {
             }
             className="input input-bordered w-1/2"
             placeholder="Assignment Mark"
+            defaultValue={assignment?.mark}
             type="text"
           />
           <div className="w-1/2">
@@ -97,12 +100,19 @@ const UpdateAssignment = () => {
               }
               className="select select-primary w-full max-w-xs"
             >
-              <option disabled selected>
-                Assignment difficulty level-
+              <option value="">Assignment difficulty level-</option>
+              <option value="easy" selected={addAssignment.level === "easy"}>
+                easy
               </option>
-              <option>easy</option>
-              <option>medium</option>
-              <option>hard</option>
+              <option
+                value="medium"
+                selected={addAssignment.level === "medium"}
+              >
+                medium
+              </option>
+              <option value="hard" selected={addAssignment.level === "hard"}>
+                hard
+              </option>
             </select>
           </div>
         </div>
@@ -113,19 +123,20 @@ const UpdateAssignment = () => {
             }
             className="input input-bordered input-lg w-1/2"
             placeholder="Description"
+            defaultValue={addAssignment?.description}
             type="text"
           />
         </div>
       </div>
       <div className="bg-green-700 text-center font-bold text-4xl p-4 text-white rounded-b-lg">
         <div className="">
-          <button onClick={handleAddAssignment} className="btn badge-outline">
+          <button type="submit" className="btn badge-outline">
             <RxUpdate></RxUpdate>
             Add assignment
           </button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

@@ -8,6 +8,7 @@ import AddAssignment from "../Page/AddAssignment";
 import UpdateAssignment from "../Page/UpdateAssignment";
 import TakeAssignment from "../Page/TakeAssignment";
 import AllSubmit from "../Page/AllSubmit";
+import AllAssignment from "../Page/AllAssignment";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
       {
         path: "takeAssignment",
         element: <TakeAssignment></TakeAssignment>,
+      },
+      {
+        path: "allAssignment",
+        element: <AllAssignment></AllAssignment>,
+        loader: () => fetch("http://localhost:5000/allAssignment"),
       },
       {
         path: "allSubmit",

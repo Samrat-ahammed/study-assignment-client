@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const Card = ({ item }) => {
-  console.log(item);
   const { _id, title, mark, level, imgUrl } = item || {};
 
   return (

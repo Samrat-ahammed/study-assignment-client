@@ -1,13 +1,29 @@
 import { Link, NavLink } from "react-router-dom";
 import navbarLogo from "../assets/navbarlogo.png";
 import profileLogo from "../assets/profileLogo.svg";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then((result) => result, Swal.fire("log out success,", "", "error"))
+      .catch((error) => console.log(error));
+  };
+
   const navLink = (
     <>
       <li>
         <NavLink to={"/"}>
           <a>Home</a>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to={"allAssignment"}>
+          <a>All-Assignment</a>
         </NavLink>
       </li>
       <li>
@@ -26,24 +42,31 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      <li>
-        <NavLink to={"login"}>
-          <a>Login</a>
-        </NavLink>
-      </li>
+      {!user ? (
+        <li>
+          <NavLink to={"/login"}>Login</NavLink>
+        </li>
+      ) : (
+        <li onClick={handleLogOut}>Logout</li>
+      )}
     </>
   );
+
   const profileNav = (
     <>
       <li>
-        <a>Samrat ahammmed</a>
+        <a>{user?.displayName}</a>
       </li>
       <li>
-        <a>Samratahammmed@gmail.com</a>
+        <a>{user?.email}</a>
       </li>
-      <li>
-        <a>Login</a>
-      </li>
+      {!user ? (
+        <li>
+          <NavLink to={"/login"}>Login</NavLink>
+        </li>
+      ) : (
+        <li onClick={handleLogOut}>Logout</li>
+      )}
     </>
   );
 
@@ -88,9 +111,14 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end flex badge badge-outline items-center text-center m-auto justify-self-center">
+            <li className="">Logout</li>
             <label tabIndex={0} className="">
-              <img className="h-14" src={profileLogo} alt="" />
+              <img
+                className="h-14"
+                src={!user?.email ? profileLogo : user?.photoURL}
+                alt=""
+              />
             </label>
             <ul
               tabIndex={0}
