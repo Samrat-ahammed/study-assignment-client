@@ -1,3 +1,4 @@
+import { useLoaderData } from "react-router-dom";
 import Card from "../Component/Card";
 import Footer from "../Component/Footer";
 import HomeAbout from "../Component/HomeAbout";
@@ -6,6 +7,7 @@ import { useEffect, useState } from "react";
 
 const HomePage = () => {
   const [slider, setSlider] = useState([]);
+  const assignment = useLoaderData();
 
   useEffect(() => {
     fetch("/exm.json")
@@ -15,7 +17,6 @@ const HomePage = () => {
       });
   }, []);
 
-  console.log(slider);
   return (
     <div className="space-y-8">
       {/* Hero Slider ......  */}
@@ -27,7 +28,11 @@ const HomePage = () => {
         <h1 className="text-center text-green-700 text-4xl font-bold mb-8">
           Assignment
         </h1>
-        <Card></Card>
+        <div className="grid grid-cols-4 gap-5 mb-5 mt-5">
+          {assignment.map((item) => (
+            <Card key={item._id} item={item}></Card>
+          ))}
+        </div>
       </div>
       {/* Home About ...  */}
       <div>

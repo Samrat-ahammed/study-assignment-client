@@ -17,18 +17,23 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage></HomePage>,
+        loader: () => fetch("http://localhost:5000/allAssignment"),
       },
       {
-        path: "assignmentDetails",
+        path: "assignmentDetails/:id",
         element: <AssignmentDetails></AssignmentDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/allAssignment/${params.id}`),
       },
       {
         path: "addAssignment",
         element: <AddAssignment></AddAssignment>,
       },
       {
-        path: "updateAssignment",
+        path: "updateAssignment/:id",
         element: <UpdateAssignment></UpdateAssignment>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/allAssignment/${params.id}`),
       },
       {
         path: "takeAssignment",
