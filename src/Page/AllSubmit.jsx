@@ -6,9 +6,9 @@ const AllSubmit = () => {
           {/* head */}
           <thead>
             <tr>
-              <th>Assignment</th>
-              <th>Name</th>
-              <th>Job</th>
+              <th>Assignment Title</th>
+              <th>Assignment Marks</th>
+              <th>Examinee Name</th>
             </tr>
           </thead>
           <tbody>
@@ -17,7 +17,7 @@ const AllSubmit = () => {
               <td className="py-5">Cy Ganderton</td>
               <td>Quality Control Specialist</td>
               <td
-                className="btn"
+                className="btn btn-info"
                 onClick={() =>
                   document.getElementById("my_modal_5").showModal()
                 }
