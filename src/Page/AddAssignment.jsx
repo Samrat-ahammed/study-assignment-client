@@ -15,7 +15,6 @@ const AddAssignment = () => {
     imgUrl: "",
     level: "",
     date: new Date(),
-    status: "Pending",
   });
 
   const handleAddAssignment = () => {

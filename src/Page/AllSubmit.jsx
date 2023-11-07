@@ -1,79 +1,116 @@
-import { useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const AllSubmit = () => {
-  const pendingAssignment = useLoaderData();
+  const [pendingAssign, setPendingAssign] = useState([]);
+  const [updatedId, setUpdatedId] = useState("");
 
-  console.log(pendingAssignment);
+  console.log(pendingAssign);
+
+  const [addAssignment, setAssignment] = useState({
+    giveMark: "",
+    status: "complete",
+  });
+
+  useEffect(() => {
+    getPendingAssingnment();
+  }, []);
+
+  const handleGiveMark = () => {
+    fetch(`http://localhost:5000/takeAssignment/${updatedId}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(addAssignment),
+    }).then(() => {
+      getPendingAssingnment();
+    });
+  };
+
+  const getPendingAssingnment = () => {
+    fetch("http://localhost:5000/takeAssignment")
+      .then((res) => res.json())
+      .then((data) => {
+        setPendingAssign(data);
+      });
+  };
 
   return (
-    <div className="bg-green-100 p-12 rounded-md">
-      <div className="overflow-x-auto bg-white">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>Assignment Title</th>
-              <th>Assignment Marks</th>
-              <th>Examinee Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-            <tr className="p-10 m-10">
-              <td className="py-5">Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
-              <td
-                className="btn btn-info"
-                onClick={() =>
-                  document.getElementById("my_modal_5").showModal()
-                }
-              >
-                Give Mark
-              </td>
+    <>
+      <div className="bg-green-100 p-12 rounded-md">
+        <div className="overflow-x-auto bg-white">
+          <table className="table">
+            {/* head */}
+            <thead>
+              <tr>
+                <th>Assignment Title</th>
+                <th>Assignment Marks</th>
+                <th>Mark</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+              {pendingAssign.map((item) => (
+                <tr key={item._id} className="p-10 m-10">
+                  <td className="py-5">{item?.title}</td>
+                  <td>Assignment Mark : {item?.mark}</td>
+                  <td
+                    className="btn btn-info"
+                    onClick={() => {
+                      document.getElementById("my_modal_5").showModal();
+                      setUpdatedId(item._id);
+                    }}
+                  >
+                    Give Mark
+                  </td>
+                  <td>{item.status}</td>
 
-              <dialog
-                id="my_modal_5"
-                className="modal modal-bottom sm:modal-middle"
-              >
-                <div className="modal-box">
-                  <h3 className="font-bold text-lg">Feedback</h3>
-                  <p className="py-4">
-                    <a className="underline text-blue-900" href="http://">
-                      Google Drive Link
-                    </a>
-                    <br />
-                    <div className="mt-5">
-                      <h2 className="font-bold">Give mark:</h2>
-                      <input
-                        type="number"
-                        placeholder="Give Mark"
-                        className="input input-bordered"
-                        required
-                      />
-                    </div>
-                    <div className="mt-5">
-                      <h2 className="font-bold">Give Feedback:</h2>
-                      <input
-                        type="number"
-                        placeholder="Give Mark"
-                        className="input input-bordered w-full"
-                        required
-                      />
-                    </div>
-                  </p>
-                  <div className="modal-action">
-                    <form method="dialog">
-                      {/* if there is a button in form, it will close the modal */}
-                      {/* <button className="btn btn-secondary">Submit</button> */}
-                    </form>
-                  </div>
+                  {/* Open the modal using document.getElementById('ID').showModal() method */}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <dialog
+            id="my_modal_5"
+            className="modal modal-bottom sm:modal-middle"
+          >
+            <div className="modal-box">
+              <h3 className="font-bold text-lg">PdfLink!</h3>
+              <attribute className="text-blue-800"></attribute>
+              <div className="py-4">
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Give Mark</span>
+                  </label>
+                  <label className="input-group input-group-vertical">
+                    <span>Mark</span>
+                    <input
+                      onChange={(e) =>
+                        setAssignment({
+                          ...addAssignment,
+                          giveMark: e?.target.value,
+                        })
+                      }
+                      type="text"
+                      placeholder="Mark"
+                      className="input input-bordered"
+                    />
+                  </label>
                 </div>
-              </dialog>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+              <div className="modal-action">
+                <form method="dialog">
+                  {/* if there is a button in form, it will close the modal */}
+                  <button onClick={handleGiveMark} className="btn">
+                    submit
+                  </button>
+                </form>
+              </div>
+            </div>
+          </dialog>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

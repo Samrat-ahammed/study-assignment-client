@@ -6,10 +6,10 @@ import RegisterPage from "../Page/RegisterPage";
 import AssignmentDetails from "../Page/AssignmentDetails";
 import AddAssignment from "../Page/AddAssignment";
 import UpdateAssignment from "../Page/UpdateAssignment";
-import TakeAssignment from "../Page/TakeAssignment";
 import AllSubmit from "../Page/AllSubmit";
 import AllAssignment from "../Page/AllAssignment";
 import PrivetRoute from "./PrivetRoute";
+import MyAllAssignment from "../Page/MyAllAssignment";
 
 const router = createBrowserRouter([
   {
@@ -51,8 +51,8 @@ const router = createBrowserRouter([
           fetch(`http://localhost:5000/allAssignment/${params.id}`),
       },
       {
-        path: "takeAssignment",
-        element: <TakeAssignment></TakeAssignment>,
+        path: "myAssignment",
+        element: <MyAllAssignment></MyAllAssignment>,
       },
       {
         path: "allAssignment",
@@ -60,9 +60,8 @@ const router = createBrowserRouter([
         loader: () => fetch("http://localhost:5000/allAssignment"),
       },
       {
-        path: "allSubmit/:status",
+        path: "allSubmit",
         element: <AllSubmit></AllSubmit>,
-        loader: fetch("http://localhost:5000/takeAssignment"),
       },
     ],
   },

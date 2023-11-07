@@ -31,24 +31,47 @@ const Navbar = () => {
           <a>Add-Assignment</a>
         </NavLink>
       </li>
-      <li>
-        <NavLink to={"allSubmit"}>
-          <a>submitted-assignments</a>
-        </NavLink>
-      </li>
-      <li>
+      {user?.email && (
+        <>
+          <li>
+            <Link to={"/myAssignment"}>My-Assignment</Link>
+          </li>
+        </>
+      )}
+      {/* <li>
         <NavLink to={"takeAssignment"}>
           <a>My-Assignment</a>
         </NavLink>
-      </li>
+      </li> */}
+      {user?.email ? (
+        <>
+          <li>
+            <Link to={"/allSubmit"}>submitted-assignments</Link>
+          </li>
 
-      {!user ? (
+          <li onClick={handleLogOut}>
+            <Link>Log Out</Link>
+          </li>
+        </>
+      ) : (
+        <li>
+          <Link to={"/login"}>Login</Link>
+        </li>
+      )}
+
+      {/* <li>
+        <NavLink to={"allSubmit"}>
+          <a>submitted-assignments</a>
+        </NavLink>
+      </li> */}
+
+      {/* {!user ? (
         <li>
           <NavLink to={"/login"}>Login</NavLink>
         </li>
       ) : (
         <li onClick={handleLogOut}>Logout</li>
-      )}
+      )} */}
     </>
   );
 

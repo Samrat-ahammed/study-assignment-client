@@ -1,7 +1,8 @@
 // import { useContext, useEffect, useState } from "react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../Provider/AuthProvider";
 // import { AuthContext } from "../Provider/AuthProvider";
 
 const AssignmentDetails = () => {
@@ -39,14 +40,32 @@ const AssignmentDetails = () => {
   //       }
   //     });
   // };
+
+  const { user } = useContext(AuthContext);
   const [addAssignment, setAssignment] = useState({
-    // id: assignment?._id,
+    email: user.email,
     mark: assignment?.mark,
     title: assignment?.title,
     note: "",
     pdf: "",
-    status: assignment?.status,
+    status: "Pending",
   });
+
+  const handleTakeAssignment = () => {
+    fetch("http://localhost:5000/takeAssignment", {
+      method: "Post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(addAssignment),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        Swal.fire("Take Your Assignment", "", "success");
+        // event.target.reset();
+      });
+  };
 
   return (
     <div>
