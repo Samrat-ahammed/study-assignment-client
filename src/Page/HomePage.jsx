@@ -4,10 +4,11 @@ import Footer from "../Component/Footer";
 import HomeAbout from "../Component/HomeAbout";
 import Carousel from "../Component/Slider";
 import { useEffect, useState } from "react";
+import HomeAboutSec from "../Component/HomeAboutSec";
 
 const HomePage = () => {
-  const [slider, setSlider] = useState([]);
   const assignment = useLoaderData();
+  const [slider, setSlider] = useState([]);
 
   useEffect(() => {
     fetch("/exm.json")
@@ -28,9 +29,9 @@ const HomePage = () => {
         <h1 className="text-center text-green-700 text-4xl font-bold mb-8">
           Assignment
         </h1>
-        <div className="grid grid-cols-4 gap-5 mb-5 mt-5">
-          {assignment.map((item) => (
-            <Card key={item._id} item={item}></Card>
+        <div className="grid grid-cols-a gap-5 mb-5 mt-5 md:grid-cols-2 lg:grid-cols-4">
+          {assignment?.map((item) => (
+            <Card key={item?._id} item={item}></Card>
           ))}
         </div>
       </div>
@@ -39,12 +40,13 @@ const HomePage = () => {
         <HomeAbout></HomeAbout>
       </div>
       {/* some about .. */}
+
+      <HomeAboutSec></HomeAboutSec>
       <div className="w-1/2 mx-auto text-center">
-        <h2 className="font-bold text-2xl mb-3">About</h2>
         <p className="text-gray-500">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum fuga
-          cumque qui quidem maiores, amet labore deleniti iure ullam repellendus
-          consectetur illo nulla non minima blanditiis ab aliquid quae magnam!
+          Teaching Methods: Various teaching methods, from traditional lectures
+          to hands-on experiences, are used to facilitate learning. The choice
+          of method can depend on the subject matter, age of the students, and
         </p>
       </div>
       {/* Footer....  */}

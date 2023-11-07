@@ -1,4 +1,10 @@
+import { useLoaderData } from "react-router-dom";
+
 const AllSubmit = () => {
+  const pendingAssignment = useLoaderData();
+
+  console.log(pendingAssignment);
+
   return (
     <div className="bg-green-100 p-12 rounded-md">
       <div className="overflow-x-auto bg-white">
@@ -58,7 +64,7 @@ const AllSubmit = () => {
                   <div className="modal-action">
                     <form method="dialog">
                       {/* if there is a button in form, it will close the modal */}
-                      <button className="btn btn-secondary">Submit</button>
+                      {/* <button className="btn btn-secondary">Submit</button> */}
                     </form>
                   </div>
                 </div>

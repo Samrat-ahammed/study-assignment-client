@@ -111,11 +111,11 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end flex badge badge-outline items-center text-center m-auto justify-self-center">
+          <div className="dropdown dropdown-end flex badge badge-outline">
             {/* <li className="">{user.email}</li> */}
             <label tabIndex={0} className="">
               <img
-                className="h-14"
+                className="h-14 rounded-full"
                 src={!user?.email ? profileLogo : user?.photoURL}
                 alt=""
               />

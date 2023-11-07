@@ -9,6 +9,7 @@ import UpdateAssignment from "../Page/UpdateAssignment";
 import TakeAssignment from "../Page/TakeAssignment";
 import AllSubmit from "../Page/AllSubmit";
 import AllAssignment from "../Page/AllAssignment";
+import PrivetRoute from "./PrivetRoute";
 
 const router = createBrowserRouter([
   {
@@ -22,17 +23,30 @@ const router = createBrowserRouter([
       },
       {
         path: "assignmentDetails/:id",
-        element: <AssignmentDetails></AssignmentDetails>,
+        element: (
+          <PrivetRoute>
+            <AssignmentDetails></AssignmentDetails>
+          </PrivetRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/allAssignment/${params.id}`),
       },
       {
         path: "addAssignment",
-        element: <AddAssignment></AddAssignment>,
+        element: (
+          <PrivetRoute>
+            <AddAssignment></AddAssignment>
+          </PrivetRoute>
+        ),
       },
       {
         path: "updateAssignment/:id",
-        element: <UpdateAssignment></UpdateAssignment>,
+        element: (
+          <PrivetRoute>
+            {" "}
+            <UpdateAssignment></UpdateAssignment>
+          </PrivetRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/allAssignment/${params.id}`),
       },
@@ -46,8 +60,9 @@ const router = createBrowserRouter([
         loader: () => fetch("http://localhost:5000/allAssignment"),
       },
       {
-        path: "allSubmit",
+        path: "allSubmit/:status",
         element: <AllSubmit></AllSubmit>,
+        loader: fetch("http://localhost:5000/takeAssignment"),
       },
     ],
   },

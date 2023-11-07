@@ -9,13 +9,12 @@ const AllAssignment = () => {
   const [addProduct, setAddProduct] = useState([]);
 
   useEffect(() => {
-    if (user?.email) {
-      fetch(`http://localhost:5000/allAssignment?email=${user.email}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setAddProduct(data);
-        });
-    }
+    fetch(`http://localhost:5000/allAssignment?email=${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setAddProduct(data);
+      });
   }, [user]);
 
   const handleDelete = (_id) => {
@@ -52,16 +51,17 @@ const AllAssignment = () => {
       {addProduct?.map((item) => (
         <div
           key={item?._id}
-          className="card lg:card-side bg-base-100 border h-[200px] w-full mb-5"
+          className=" w-full h-full card lg:card-side bg-base-100 border mb-5"
         >
-          <figure className="w-1/4 h-full">
-            <img className="w-full h-full" src={item?.imgUrl} alt="Album" />
+          <figure className="w-full h-full md:w-1/4 md:h-full">
+            <img className="md:w-full h-full" src={item?.imgUrl} alt="Album" />
           </figure>
           <div className="card-body">
             <h2 className="card-title">{item?.title}</h2>
-            <p>
-              <div className="badge badge-secondary">Mark: {item?.mark}</div>
-            </p>
+            <div className="space-x-5">
+              <p className="badge badge-secondary ">Mark: {item?.mark}</p>
+              <p className="badge badge-outline">status: {item?.status}</p>
+            </div>
             <div className="card-actions justify-end">
               <button
                 onClick={() => handleDelete(item?._id)}

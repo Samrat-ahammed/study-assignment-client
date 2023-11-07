@@ -3,8 +3,8 @@ import aboutImg from "../assets/img1.jpg";
 
 const HomeAbout = () => {
   return (
-    <div className="flex space-x-8">
-      <div className="w-1/2 flex items-center justify-center">
+    <div className="items-center justify-center mx-auto space-x-8 md:flex lg:flex">
+      <div className="md:w-1/2 flex items-center justify-center">
         <div>
           {" "}
           <h3 className="text-5xl font-bold text-green-500 mb-10">
@@ -45,7 +45,7 @@ const HomeAbout = () => {
           </div>
         </div>
       </div>
-      <div className="w-1/2">
+      <div className="md:w-1/2">
         <img className="w-full rounded-md" src={aboutImg} alt="" />
       </div>
     </div>

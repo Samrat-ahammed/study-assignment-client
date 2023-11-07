@@ -3,15 +3,10 @@ import { Link } from "react-router-dom";
 const Card = ({ item }) => {
   const { _id, title, mark, level, imgUrl } = item || {};
 
-
-
-
-  
-
   return (
     <div>
       <div className="card card-compact bg-base-100 shadow-xl">
-        <figure>
+        <figure className="h-[150px]">
           <img className="w-full" src={imgUrl} alt="Shoes" />
         </figure>
         <div className="card-body">

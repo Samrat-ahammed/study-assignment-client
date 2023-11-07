@@ -1,44 +1,52 @@
-import { useContext, useEffect, useState } from "react";
+// import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
-import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
+// import { AuthContext } from "../Provider/AuthProvider";
 
 const AssignmentDetails = () => {
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
   const assignment = useLoaderData();
-  const [checking, setChecking] = useState([]);
+  // const [checking, setChecking] = useState([]);
 
-  const url = `http://localhost:5000/allAssignment?email=${user?.email}`;
+  // const url = `http://localhost:5000/allAssignment?email=${user?.email}`;
 
-  useEffect(() => {
-    if (user?.email) {
-      fetch(`http://localhost:5000/allAssignment?email=${user?.email}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setChecking(data);
-        });
-    }
-  }, [url, user?.email]);
-  const handleConfirm = (id) => {
-    fetch(`http://localhost:5000/allAssignment/${id}`, {
-      method: "PATCH",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ status: "confirm" }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     fetch(`http://localhost:5000/allAssignment?email=${user?.email}`)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setChecking(data);
+  //       });
+  //   }
+  // }, [url, user?.email]);
+  // const handleConfirm = (id) => {
+  //   fetch(`http://localhost:5000/allAssignment/${id}`, {
+  //     method: "PATCH",
+  //     headers: { "content-type": "application/json" },
+  //     body: JSON.stringify({ status: "confirm" }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       // console.log(data);
 
-        if (data.modifiedCount > 0) {
-          const remaining = checking.filter((items) => items._id !== id);
-          const update = checking.find((item) => item._id === id);
-          update.status = "confirm";
-          const newChecking = [update, ...remaining];
-          setChecking(newChecking);
-        }
-      });
-  };
-  console.log(checking);
-  console.log(checking.status);
+  //       if (data.modifiedCount > 0) {
+  //         const remaining = checking.filter((items) => items._id !== id);
+  //         const update = checking.find((item) => item._id === id);
+  //         update.status = "confirm";
+  //         const newChecking = [update, ...remaining];
+  //         setChecking(newChecking);
+  //       }
+  //     });
+  // };
+  const [addAssignment, setAssignment] = useState({
+    // id: assignment?._id,
+    mark: assignment?.mark,
+    title: assignment?.title,
+    note: "",
+    pdf: "",
+    status: assignment?.status,
+  });
 
   return (
     <div>
@@ -63,8 +71,8 @@ const AssignmentDetails = () => {
               </div>
             </div>
             <Link
-              to={"/takeAssignment"}
-              // onClick={() => document.getElementById("my_modal_5").showModal()}
+              // to={"/takeAssignment"}
+              onClick={() => document.getElementById("my_modal_5").showModal()}
               className="btn badge badge-accent"
             >
               Take assignment
@@ -78,6 +86,9 @@ const AssignmentDetails = () => {
                 <h3 className="font-bold text-lg">google drive link</h3>
 
                 <input
+                  onChange={(e) =>
+                    setAssignment({ ...addAssignment, pdf: e?.target.value })
+                  }
                   type="text"
                   placeholder="PDF link"
                   className="input input-bordered input-accent w-full max-w-xs"
@@ -85,22 +96,28 @@ const AssignmentDetails = () => {
                 <h3 className="font-bold text-lg">Quick Note</h3>
 
                 <input
+                  onChange={(e) =>
+                    setAssignment({ ...addAssignment, note: e?.target.value })
+                  }
                   type="text"
                   placeholder="Note"
                   className="input input-bordered input-accent w-full max-w-xs"
                 />
+                <h3 className="font-bold text-lg">Status</h3>
+
+                <input
+                  type="text"
+                  placeholder="Pending"
+                  className="input input-bordered input-accent w-full max-w-xs"
+                />
                 <div className="modal-action">
                   <form method="dialog">
-                    {checking?.status === "confirm" ? (
-                      <span className="font-bold text-blue-800">Confirmed</span>
-                    ) : (
-                      <button
-                        onClick={() => handleConfirm(assignment._id)}
-                        className="btn btn-ghost btn-xs"
-                      >
-                        Confirm
-                      </button>
-                    )}
+                    <button
+                      onClick={handleTakeAssignment}
+                      className="btn btn-ghost btn-xs"
+                    >
+                      Take Assignment
+                    </button>
                   </form>
                 </div>
               </div>

@@ -22,7 +22,7 @@ const UpdateAssignment = () => {
     date: new Date(),
   });
 
-  const handleAddAssignment = (e) => {
+  const handleUpdateAssignment = (e) => {
     e.preventDefault();
     fetch(`http://localhost:5000/allAssignment/${assignment._id}`, {
       method: "PUT",
@@ -46,7 +46,7 @@ const UpdateAssignment = () => {
     }
   }, [assignment]);
   return (
-    <form onSubmit={handleAddAssignment} className="mb-10 mt-10">
+    <form onSubmit={handleUpdateAssignment} className="mb-10 mt-10">
       <div className="bg-green-700 font-bold text-4xl p-4 text-white rounded-t-lg">
         Create-Your Assignment
       </div>
@@ -132,7 +132,7 @@ const UpdateAssignment = () => {
         <div className="">
           <button type="submit" className="btn badge-outline">
             <RxUpdate></RxUpdate>
-            Add assignment
+            Update Assignment
           </button>
         </div>
       </div>

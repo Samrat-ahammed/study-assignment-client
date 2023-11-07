@@ -1,55 +1,67 @@
-import profileLogo from "../assets/profileLogo.svg";
+// import { useContext, useEffect, useState } from "react";
+// import { AuthContext } from "../Provider/AuthProvider";
 const TakeAssignment = () => {
+  // const { user } = useContext(AuthContext);
+  // const [checking, setChecking] = useState([]);
+
+  // const url = `http://localhost:5000/allAssignment?email=${user?.email}`;
+
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     fetch(`http://localhost:5000/allAssignment?email=${user?.email}`)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setChecking(data);
+  //       });
+  //   }
+  // }, [url, user?.email]);
+  // const handleConfirm = (id) => {
+  //   fetch(`http://localhost:5000/allAssignment/${id}`, {
+  //     method: "PATCH",
+  //     headers: { "content-type": "application/json" },
+  //     body: JSON.stringify({ status: "confirm" }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       // console.log(data);
+
+  //       if (data.modifiedCount > 0) {
+  //         const remaining = checking.filter((items) => items._id !== id);
+  //         const update = checking.find((item) => item._id === id);
+  //         update.status = "confirm";
+  //         const newChecking = [update, ...remaining];
+  //         setChecking(newChecking);
+  //       }
+  //     });
+  // };
+  // console.log(checking);
+  // console.log(checking.status);
+
   return (
-    <div className="bg-green-100 p-12 rounded-md">
-      <div className="overflow-x-auto shadow bg-white">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <th>Name</th>
-              <th>Mark</th>
-              <th>Level</th>
-              <th>Confirmation</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src={profileLogo}
-                        alt="Avatar Tailwind CSS Component"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Name</div>
-                    <div className="text-sm opacity-50">Email</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <span className="badge badge-ghost badge-sm">Mark</span>
-              </td>
-              <td>hard</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">Delete</button>
-              </th>
-            </tr>
-          </tbody>
-        </table>
+    <div className="bg-green-100 p-12 rounded-md flex justify-between">
+      <div>
+        <div>
+          {" "}
+          <h2 className="font-bold">PDF Link</h2>
+          <input
+            type="text"
+            placeholder="PDF link"
+            className="input input-bordered input-info w-full max-w-xs"
+          />
+        </div>
+        <div>
+          <h2 className="font-bold">Quick Note</h2>
+          <input
+            type="text"
+            placeholder="Type here"
+            className="input input-bordered input-lg w-full max-w-xs"
+          />
+        </div>
+      </div>
+      <div>
+        <h3 className="text-blue-800 font-bold">
+          status: <button className="btn">pending status</button>
+        </h3>
       </div>
     </div>
   );
