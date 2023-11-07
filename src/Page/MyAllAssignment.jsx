@@ -89,7 +89,7 @@ const MyAllAssignment = () => {
           </div>
         ))
       ) : (
-        <div className="items-center mx-auto">
+        <div className="items-center text-center mx-auto">
           <h1 className="text-red-800 text-3xl font-bold text-center">
             Please Add Assignment.....
           </h1>
