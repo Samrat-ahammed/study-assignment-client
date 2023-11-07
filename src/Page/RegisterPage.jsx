@@ -3,6 +3,7 @@ import registerLogo from "../assets/registerlogo.png";
 import { FcGoogle } from "react-icons/Fc";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 const RegisterPage = () => {
   const { createUser } = useContext(AuthContext);
 
@@ -18,6 +19,7 @@ const RegisterPage = () => {
       .then((result) => {
         const user = result.user;
         console.log("created user", user);
+        Swal.fire("Register Success", "success");
       })
       .catch((error) => console.log(error));
   };

@@ -19,6 +19,8 @@ const LoginPage = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(location?.state ? location?.state : "/");
+        Swal.fire("You are Login", "success");
       })
       .catch((error) => console.log(error));
   };

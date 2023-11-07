@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const AllSubmit = () => {
+  const { user } = useContext(AuthContext);
   const [pendingAssign, setPendingAssign] = useState([]);
   const [updatedId, setUpdatedId] = useState("");
 
@@ -26,7 +28,7 @@ const AllSubmit = () => {
   };
 
   const getPendingAssingnment = () => {
-    fetch("http://localhost:5000/takeAssignment")
+    fetch(`http://localhost:5000/takeAssignment?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setPendingAssign(data);

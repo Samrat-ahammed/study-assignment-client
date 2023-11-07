@@ -131,10 +131,11 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal bg-green-200 rounded-lg  gap-4  px-1">
             {navLink}
+            <li>{user?.email}</li>
           </ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end flex badge badge-outline">
+          <div className="dropdown dropdown-end">
             {/* <li className="">{user.email}</li> */}
             <label tabIndex={0} className="">
               <img

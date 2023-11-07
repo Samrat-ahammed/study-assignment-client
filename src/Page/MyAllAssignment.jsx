@@ -1,49 +1,100 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const MyAllAssignment = () => {
-  const [pendingAssign, setPendingAssign] = useState();
+  const [addProduct, setAddProduct] = useState([]);
 
+  const { user } = useContext(AuthContext);
+  console.log(user?.email);
+
+  const url = `http://localhost:5000/takeAssignment?email=${user?.email}`;
   useEffect(() => {
-    fetch("http://localhost:5000/takeAssignment")
-      .then((res) => res.json())
-      .then((data) => {
-        setPendingAssign(data);
-        console.log(data);
-      });
-  }, []);
+    if (user?.email) {
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          setAddProduct(data);
+          console.log(data);
+        });
+    }
+  }, [user, url]);
+
+  const handleDelete = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result?.isConfirmed) {
+        fetch(`http://localhost:5000/takeAssignment/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.deletedCount > 0) {
+              // eslint-disable-next-line react/prop-types
+              const remaining = addProduct.filter((item) => item._id !== _id);
+              console.log(remaining);
+              setAddProduct(remaining);
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            }
+          });
+      }
+    });
+  };
 
   return (
-    <div>
-      {pendingAssign?.map((item) => (
-        <div key={item._id}>
-          <div className="bg-green-100 p-12 rounded-md flex justify-between">
-            <div>
-              <div>
-                {" "}
-                <h2 className="font-bold">PDF Link</h2>
-                <input
-                  type="text"
-                  placeholder="PDF link"
-                  className="input input-bordered input-info w-full max-w-xs"
-                />
+    <div className="grid grid-cols-a gap-5 mb-5 mt-5 md:grid-cols-2 lg:grid-cols-4">
+      {addProduct.length > 0 ? (
+        addProduct?.map((item) => (
+          <div key={item._id} className="card bg-base-100 shadow-xl">
+            <figure className="px-10 pt-10 h-40">
+              <img
+                src={item.imgUrl}
+                alt="Shoes"
+                className="rounded-xl w-full h-full"
+              />
+            </figure>
+            <div className="card-body items-center text-center">
+              <h2 className="card-title">{item.title}</h2>
+              <p>
+                Assignment Status:{" "}
+                <span className="text-blue-800 font-bold">{item.status}</span>
+              </p>
+              <p className="badge badge-secondary">
+                Assignment Mark: {item.mark}
+              </p>
+              <p
+                className="badge badge-primary
+            "
+              >
+                Obtain Marks: {item.giveMark}
+              </p>
+              <p>feedback: {item.note}</p>
+              <div className="card-actions">
+                <button
+                  onClick={() => handleDelete(item._id)}
+                  className="btn btn-primary"
+                >
+                  Delete
+                </button>
               </div>
-              <div>
-                <h2 className="font-bold">Quick Note</h2>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered input-lg w-full max-w-xs"
-                />
-              </div>
-            </div>
-            <div>
-              <h3 className="text-blue-800 font-bold">
-                status: <button className="btn">pending status</button>
-              </h3>
             </div>
           </div>
+        ))
+      ) : (
+        <div className="items-center mx-auto">
+          <h1 className="text-red-800 text-3xl font-bold text-center">
+            Please Add Assignment.....
+          </h1>
         </div>
-      ))}
+      )}
     </div>
   );
 };

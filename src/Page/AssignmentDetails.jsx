@@ -46,6 +46,7 @@ const AssignmentDetails = () => {
     email: user.email,
     mark: assignment?.mark,
     title: assignment?.title,
+    imgUrl: assignment?.imgUrl,
     note: "",
     pdf: "",
     status: "Pending",
@@ -122,13 +123,7 @@ const AssignmentDetails = () => {
                   placeholder="Note"
                   className="input input-bordered input-accent w-full max-w-xs"
                 />
-                <h3 className="font-bold text-lg">Status</h3>
 
-                <input
-                  type="text"
-                  placeholder="Pending"
-                  className="input input-bordered input-accent w-full max-w-xs"
-                />
                 <div className="modal-action">
                   <form method="dialog">
                     <button
