@@ -10,6 +10,8 @@ import AllSubmit from "../Page/AllSubmit";
 import AllAssignment from "../Page/AllAssignment";
 import PrivetRoute from "./PrivetRoute";
 import MyAllAssignment from "../Page/MyAllAssignment";
+import Faq from "../Page/Faq";
+import FeatureSection from "../Page/FeatureSection";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +64,14 @@ const router = createBrowserRouter([
       {
         path: "allSubmit",
         element: <AllSubmit></AllSubmit>,
+      },
+      {
+        path: "faq",
+        element: <Faq></Faq>,
+      },
+      {
+        path: "/feature",
+        element: <FeatureSection></FeatureSection>,
       },
     ],
   },

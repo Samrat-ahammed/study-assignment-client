@@ -1,18 +1,28 @@
 import { Link, NavLink } from "react-router-dom";
 import navbarLogo from "../assets/navbarlogo.png";
 import profileLogo from "../assets/profileLogo.svg";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [profile, setProfile] = useState([]);
 
   const handleLogOut = () => {
     logOut()
       .then((result) => result, Swal.fire("log out success,", "", "error"))
       .catch((error) => console.log(error));
   };
+
+  useEffect(() => {
+    fetch("http://localhost:5000/user")
+      .then((res) => res.json())
+      .then((data) => {
+        setProfile(data);
+        console.log(data);
+      });
+  }, []);
 
   const navLink = (
     <>
@@ -31,18 +41,17 @@ const Navbar = () => {
           <a>Add-Assignment</a>
         </NavLink>
       </li>
-      {user?.email && (
+      {user?.email ? (
         <>
           <li>
             <Link to={"/myAssignment"}>My-Assignment</Link>
           </li>
         </>
+      ) : (
+        <li>
+          <NavLink to={"/login"}>Login</NavLink>
+        </li>
       )}
-      {/* <li>
-        <NavLink to={"takeAssignment"}>
-          <a>My-Assignment</a>
-        </NavLink>
-      </li> */}
       {user?.email ? (
         <>
           <li>
@@ -59,6 +68,28 @@ const Navbar = () => {
         </li>
       )}
 
+      <li className="dropdown dropdown-left">
+        <li tabIndex={0} className="">
+          Feature
+        </li>
+        <ul
+          tabIndex={0}
+          className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+        >
+          <li>
+            <NavLink to={"faq"}>
+              <a>Faq</a>
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to={"feature"}>
+              <a>Feature</a>
+            </NavLink>
+          </li>
+        </ul>
+      </li>
+
       {/* <li>
         <NavLink to={"allSubmit"}>
           <a>submitted-assignments</a>
@@ -72,24 +103,6 @@ const Navbar = () => {
       ) : (
         <li onClick={handleLogOut}>Logout</li>
       )} */}
-    </>
-  );
-
-  const profileNav = (
-    <>
-      <li>
-        <a>{user?.displayName}</a>
-      </li>
-      <li>
-        <a>{user?.email}</a>
-      </li>
-      {!user ? (
-        <li>
-          <NavLink to={"/login"}>Login</NavLink>
-        </li>
-      ) : (
-        <li onClick={handleLogOut}>Logout</li>
-      )}
     </>
   );
 
@@ -131,27 +144,45 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal bg-green-200 rounded-lg  gap-4  px-1">
             {navLink}
-            <li>{user?.email}</li>
           </ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end">
-            {/* <li className="">{user.email}</li> */}
-            <label tabIndex={0} className="">
+          <div className="dropdown dropdown-left">
+            <label
+              tabIndex={0}
+              className="btn hover:bg-slate-100 m-1 h-[50px]  rounded-full"
+            >
               <img
-                className="h-14 rounded-full"
+                className="h-full rounded-full"
                 src={!user?.email ? profileLogo : user?.photoURL}
                 alt=""
               />
             </label>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box"
+              className="dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-box w-52"
             >
-              {profileNav}
+              {user?.email ? (
+                <li>
+                  <a>{user?.name}</a>
+                </li>
+              ) : (
+                ""
+              )}
+              {user?.email ? (
+                <li onClick={handleLogOut}>
+                  <a>Logout</a>
+                </li>
+              ) : (
+                <li>
+                  <Link to={"/login"}>Login</Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>
+
+        {/* <img src={profile?.imgUrl} alt="" /> */}
       </div>
     </div>
   );

@@ -41,14 +41,15 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       // console.log("current user", currentUser);
       setLoading(false);
-      // const loggedUser = { email: currentUser.email };
+
       // if (currentUser) {
+      //   const loggedUser = { email: currentUser.email };
       //   axios
       //     .post("http://localhost:5000/jwt", loggedUser, {
       //       withCredentials: true,
       //     })
       //     .then((res) => {
-      //       console.log(res.data);
+      //       console.log("token responce", res.data);
       //     });
       // }
     });

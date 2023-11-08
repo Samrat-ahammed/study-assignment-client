@@ -17,7 +17,8 @@ const AddAssignment = () => {
     date: new Date(),
   });
 
-  const handleAddAssignment = () => {
+  const handleAddAssignment = (e) => {
+    e.preventDefault();
     fetch("http://localhost:5000/allAssignment", {
       method: "Post",
       headers: {
@@ -33,13 +34,14 @@ const AddAssignment = () => {
       });
   };
   return (
-    <div className="mb-10 mt-10">
+    <form onSubmit={handleAddAssignment} className="mb-10 mt-10">
       <div className="bg-green-700 font-bold text-4xl p-4 text-white rounded-t-lg">
         Create-Your Assignment
       </div>
       <div className="space-y-4 bg-green-200 p-12">
         <div className="flex gap-4">
           <input
+            required
             onChange={(e) =>
               setAssignment({ ...addAssignment, title: e?.target.value })
             }
@@ -48,6 +50,7 @@ const AddAssignment = () => {
             type="text"
           />
           <DatePicker
+            required
             className="input input-bordered w-full"
             selected={addAssignment.date}
             onChange={(date) => setAssignment({ ...addAssignment, date: date })}
@@ -55,12 +58,14 @@ const AddAssignment = () => {
         </div>
         <div className="flex gap-4">
           <input
+            required
             className="input input-bordered w-1/2"
             placeholder="Enter Your Email"
             defaultValue={user?.email}
             type="text"
           />
           <input
+            required
             onChange={(e) =>
               setAssignment({ ...addAssignment, imgUrl: e?.target.value })
             }
@@ -71,6 +76,7 @@ const AddAssignment = () => {
         </div>
         <div className="flex gap-4">
           <input
+            required
             onChange={(e) =>
               setAssignment({ ...addAssignment, mark: e?.target.value })
             }
@@ -107,14 +113,15 @@ const AddAssignment = () => {
         </div>
       </div>
       <div className="bg-green-700 text-center font-bold text-4xl p-4 text-white rounded-b-lg">
-        <div className="">
-          <button onClick={handleAddAssignment} className="btn badge-outline">
-            <BiMessageSquareAdd></BiMessageSquareAdd>
-            Add assignment
-          </button>
+        <div className="flex justify-center items-center text-center">
+          <input
+            className="btn badge-outline"
+            type="submit"
+            value=" Add Assignment"
+          />
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

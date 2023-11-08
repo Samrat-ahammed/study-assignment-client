@@ -8,13 +8,14 @@ const AllSubmit = () => {
 
   console.log(pendingAssign);
 
-  const [addAssignment, setAssignment] = useState({
-    giveMark: "",
-    status: "complete",
-  });
+  const [addAssignment, setAssignment] =
+    useState({
+      giveMark: "",
+      status: "complete",
+    }) || {};
 
   useEffect(() => {
-    getPendingAssingnment();
+    getPendingAssignment();
   }, []);
 
   const handleGiveMark = () => {
@@ -23,11 +24,11 @@ const AllSubmit = () => {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(addAssignment),
     }).then(() => {
-      getPendingAssingnment();
+      getPendingAssignment();
     });
   };
 
-  const getPendingAssingnment = () => {
+  const getPendingAssignment = () => {
     fetch(`http://localhost:5000/takeAssignment?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
@@ -51,24 +52,25 @@ const AllSubmit = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              {pendingAssign.map((item) => (
-                <tr key={item._id} className="p-10 m-10">
-                  <td className="py-5">{item?.title}</td>
-                  <td>Assignment Mark : {item?.mark}</td>
-                  <td
-                    className="btn btn-info"
-                    onClick={() => {
-                      document.getElementById("my_modal_5").showModal();
-                      setUpdatedId(item._id);
-                    }}
-                  >
-                    Give Mark
-                  </td>
-                  <td>{item.status}</td>
+              {pendingAssign &&
+                pendingAssign?.map((item) => (
+                  <tr key={item._id} className="p-10 m-10">
+                    <td className="py-5">{item?.title}</td>
+                    <td>Assignment Mark : {item?.mark}</td>
+                    <td
+                      className="btn btn-info"
+                      onClick={() => {
+                        document.getElementById("my_modal_5").showModal();
+                        setUpdatedId(item._id);
+                      }}
+                    >
+                      Give Mark
+                    </td>
+                    <td>{item.status}</td>
 
-                  {/* Open the modal using document.getElementById('ID').showModal() method */}
-                </tr>
-              ))}
+                    {/* Open the modal using document.getElementById('ID').showModal() method */}
+                  </tr>
+                ))}
             </tbody>
           </table>
 

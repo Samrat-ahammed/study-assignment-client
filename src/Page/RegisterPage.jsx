@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import registerLogo from "../assets/registerlogo.png";
 import { FcGoogle } from "react-icons/Fc";
 import { useContext } from "react";
@@ -6,23 +6,66 @@ import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 const RegisterPage = () => {
   const { createUser } = useContext(AuthContext);
-
+  const navegat = useNavigate();
   const handleRegister = (event) => {
     event.preventDefault();
-    const form = event.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    console.log(name, email, password);
+    const from = event.target;
+    const email = from.email.value;
+    const password = from.password.value;
+    const imgUrl = from.imgUrl.value;
+    const name = from.name.value;
+
+    console.log(email, password);
+
+    if (password < 6) {
+      Swal.fire(
+        "Password should be at least 6 characters (auth/weak-password)"
+      );
+      return;
+    } else if (!/^(?=.*[A-Z])(?=.*[$#@%*]).+$/.test(password)) {
+      return Swal.fire("Your password is so week,", "", "error");
+    }
 
     createUser(email, password)
       .then((result) => {
-        const user = result.user;
-        console.log("created user", user);
-        Swal.fire("Register Success", "success");
+        const user = { email, name, imgUrl };
+        fetch("http://localhost:5000/user", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.insertedId) {
+              Swal.fire("User Created", "", "success");
+            }
+            console.log(data);
+          });
+        console.log(result.user);
+        navegat("/");
+        Swal.fire("Create Account success", "", "success");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   };
+
+  // const handleRegister = (event) => {
+  //   event.preventDefault();
+  //   const form = event.target;
+  //   const name = form.name.value;
+  //   const email = form.email.value;
+  //   const password = form.password.value;
+  //   console.log(name, email, password);
+
+  //   createUser(email, password)
+  //     .then((result) => {
+  //       const user = result.user;
+  //       console.log("created user", user);
+  //       Swal.fire("Register Success", "success");
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
 
   return (
     <div className="flex my-5">
@@ -74,6 +117,7 @@ const RegisterPage = () => {
                 </label>
                 <input
                   type="text"
+                  name="imgUrl"
                   placeholder="Url"
                   className="input input-bordered"
                   required

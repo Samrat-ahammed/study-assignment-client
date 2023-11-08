@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "User Authentication",
+    "description": "Implement user registration and login functionality for students and instructors. This ensures that only authorized users can access and interact with the site."
+  },
+  {
+    "id": 2,
+    "title": "Assignment Creation",
+    "description": "Allow instructors to create and publish assignments. Include options for specifying assignment details like title, description, due date, and maximum points."
+  },
+  {
+    "id": 3,
+    "title": "Assignment Submission Confirmation",
+    "description": "Notify students upon successful submission of assignments and provide a confirmation message or email receipt."
+  },
+  {
+    "id": 4,
+    "title": "Analytics and Reports",
+    "description": "Analytics and Reports offer insights into the overall performance of students and the effectiveness of assignments. It provides data and visualizations for analysis."
+  },
+  {
+    "id": 5,
+    "title": "Responsive Design",
+    "description": "Ensure that your website is mobile-friendly and responsive so that students and instructors can access it from various devices."
+  },
+  {
+    "id": 6,
+    "title": "Feedback Surveys",
+    "description": "Allow instructors and students to provide feedback on the platform, helping you improve its usability and functionality."
+  }
+]
