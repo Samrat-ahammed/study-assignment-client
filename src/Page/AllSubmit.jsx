@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import axios from "axios";
 
 const AllSubmit = () => {
   const { user } = useContext(AuthContext);
@@ -28,12 +29,17 @@ const AllSubmit = () => {
     });
   };
 
+  const url = `http://localhost:5000/takeAssignment?email=${user?.email}`;
+
   const getPendingAssignment = () => {
-    fetch(`http://localhost:5000/takeAssignment?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setPendingAssign(data);
-      });
+    axios.get(url, { withCredentials: true }).then((res) => {
+      setPendingAssign(res.data);
+    });
+    // fetch(`http://localhost:5000/takeAssignment?email=${user?.email}`,)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setPendingAssign(data);
+    //   });
   };
 
   return (

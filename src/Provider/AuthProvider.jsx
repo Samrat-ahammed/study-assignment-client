@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
             withCredentials: true,
           })
           .then((res) => {
-            console.log("token responce", res.data);
+            console.log("token response", res.data);
           });
       }
     });

@@ -41,27 +41,19 @@ const Navbar = () => {
           <a>Add-Assignment</a>
         </NavLink>
       </li>
-      {user?.email ? (
+      {user?.email && (
         <>
           <li>
-            <Link to={"/myAssignment"}>My-Assignment</Link>
+            <Link to={"myAssignment"}>My-Assignment</Link>
           </li>
         </>
-      ) : (
-        <li>
-          <NavLink to={"/login"}>Login</NavLink>
-        </li>
       )}
-      {user?.email ? (
+      {user?.email && (
         <>
           <li>
-            <Link to={"/allSubmit"}>submitted-assignments</Link>
+            <Link to={"allSubmit"}>submitted-assignments</Link>
           </li>
         </>
-      ) : (
-        <li>
-          <Link to={"/login"}>Login</Link>
-        </li>
       )}
 
       <li className="dropdown dropdown-left">

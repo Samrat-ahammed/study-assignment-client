@@ -34,7 +34,7 @@ const router = createBrowserRouter([
           fetch(`http://localhost:5000/allAssignment/${params.id}`),
       },
       {
-        path: "addAssignment",
+        path: "/addAssignment",
         element: (
           <PrivetRoute>
             <AddAssignment></AddAssignment>
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "updateAssignment/:id",
+        path: "/updateAssignment/:id",
         element: (
           <PrivetRoute>
             {" "}
@@ -53,20 +53,20 @@ const router = createBrowserRouter([
           fetch(`http://localhost:5000/allAssignment/${params.id}`),
       },
       {
-        path: "myAssignment",
+        path: "/myAssignment",
         element: <MyAllAssignment></MyAllAssignment>,
       },
       {
-        path: "allAssignment",
+        path: "/allAssignment",
         element: <AllAssignment></AllAssignment>,
         loader: () => fetch("http://localhost:5000/allAssignment"),
       },
       {
-        path: "allSubmit",
+        path: "/allSubmit",
         element: <AllSubmit></AllSubmit>,
       },
       {
-        path: "faq",
+        path: "/faq",
         element: <Faq></Faq>,
       },
       {

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
+import axios from "axios";
 
 const MyAllAssignment = () => {
   const [addProduct, setAddProduct] = useState([]);
@@ -10,15 +11,18 @@ const MyAllAssignment = () => {
 
   const url = `http://localhost:5000/takeAssignment?email=${user?.email}`;
   useEffect(() => {
-    if (user?.email) {
-      fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-          setAddProduct(data);
-          console.log(data);
-        });
-    }
-  }, [user, url]);
+    // if (user?.email) {
+    axios
+      .get(url, { withCredentials: true })
+      .then((res) => setAddProduct(res.data));
+    // fetch(url)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setAddProduct(data);
+    //     console.log(data);
+    //   });
+    // }
+  }, [url]);
 
   const handleDelete = (_id) => {
     Swal.fire({

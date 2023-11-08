@@ -6,16 +6,19 @@ import { useContext, useEffect, useState } from "react";
 const AllAssignment = () => {
   //   const assignment = useLoaderData();
   const { user } = useContext(AuthContext);
+  const [level, setLevel] = useState("");
   const [addProduct, setAddProduct] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/allAssignment?email=${user?.email}`)
+    fetch(
+      `http://localhost:5000/allAssignment?email=${user?.email}&level=${level}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         setAddProduct(data);
       });
-  }, [user]);
+  }, [user, level]);
 
   const handleDelete = (_id) => {
     Swal.fire({
@@ -54,13 +57,22 @@ const AllAssignment = () => {
         </h2>
       </div>
       <ul className="menu menu-vertical lg:menu-horizontal bg-emerald-300 rounded-box mb-5">
-        <li>
+        <li
+          onClick={() => setLevel("easy")}
+          className={level === "easy" && "btn"}
+        >
           <a>Easy</a>
         </li>
-        <li>
+        <li
+          onClick={() => setLevel("medium")}
+          className={level === "medium" && "btn"}
+        >
           <a>Medium</a>
         </li>
-        <li>
+        <li
+          onClick={() => setLevel("hard")}
+          className={level === "hard" && "btn"}
+        >
           <a>Hard</a>
         </li>
       </ul>
