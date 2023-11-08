@@ -20,22 +20,25 @@ const AllSubmit = () => {
   }, []);
 
   const handleGiveMark = () => {
-    fetch(`http://localhost:5000/takeAssignment/${updatedId}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(addAssignment),
-    }).then(() => {
+    fetch(
+      `https://study-assignment-server.vercel.app/takeAssignment/${updatedId}`,
+      {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(addAssignment),
+      }
+    ).then(() => {
       getPendingAssignment();
     });
   };
 
-  const url = `http://localhost:5000/takeAssignment?email=${user?.email}`;
+  const url = `https://study-assignment-server.vercel.app/takeAssignment?email=${user?.email}`;
 
   const getPendingAssignment = () => {
     axios.get(url, { withCredentials: true }).then((res) => {
       setPendingAssign(res.data);
     });
-    // fetch(`http://localhost:5000/takeAssignment?email=${user?.email}`,)
+    // fetch(`https://study-assignment-server.vercel.app/takeAssignment?email=${user?.email}`,)
     //   .then((res) => res.json())
     //   .then((data) => {
     //     setPendingAssign(data);

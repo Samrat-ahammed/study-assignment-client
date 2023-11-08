@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/user")
+    fetch("https://study-assignment-server.vercel.app/user")
       .then((res) => res.json())
       .then((data) => {
         setProfile(data);

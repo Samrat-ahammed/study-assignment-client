@@ -29,7 +29,7 @@ const RegisterPage = () => {
     createUser(email, password)
       .then((result) => {
         const user = { email, name, imgUrl };
-        fetch("http://localhost:5000/user", {
+        fetch("https://study-assignment-server.vercel.app/user", {
           method: "POST",
           headers: {
             "content-type": "application/json",

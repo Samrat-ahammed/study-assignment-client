@@ -10,11 +10,11 @@ const AssignmentDetails = () => {
   const assignment = useLoaderData();
   // const [checking, setChecking] = useState([]);
 
-  // const url = `http://localhost:5000/allAssignment?email=${user?.email}`;
+  // const url = `https://study-assignment-server.vercel.app/allAssignment?email=${user?.email}`;
 
   // useEffect(() => {
   //   if (user?.email) {
-  //     fetch(`http://localhost:5000/allAssignment?email=${user?.email}`)
+  //     fetch(`https://study-assignment-server.vercel.app/allAssignment?email=${user?.email}`)
   //       .then((res) => res.json())
   //       .then((data) => {
   //         setChecking(data);
@@ -22,7 +22,7 @@ const AssignmentDetails = () => {
   //   }
   // }, [url, user?.email]);
   // const handleConfirm = (id) => {
-  //   fetch(`http://localhost:5000/allAssignment/${id}`, {
+  //   fetch(`https://study-assignment-server.vercel.app/allAssignment/${id}`, {
   //     method: "PATCH",
   //     headers: { "content-type": "application/json" },
   //     body: JSON.stringify({ status: "confirm" }),
@@ -53,7 +53,7 @@ const AssignmentDetails = () => {
   });
 
   const handleTakeAssignment = () => {
-    fetch("http://localhost:5000/takeAssignment", {
+    fetch("https://study-assignment-server.vercel.app/takeAssignment", {
       method: "Post",
       headers: {
         "content-type": "application/json",
