@@ -12,6 +12,7 @@ import PrivetRoute from "./PrivetRoute";
 import MyAllAssignment from "../Page/MyAllAssignment";
 import Faq from "../Page/Faq";
 import FeatureSection from "../Page/FeatureSection";
+import ErrorPage from "../Page/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       {
         path: "/feature",
         element: <FeatureSection></FeatureSection>,
+      },
+      {
+        path: "*",
+        element: <ErrorPage></ErrorPage>,
       },
     ],
   },
