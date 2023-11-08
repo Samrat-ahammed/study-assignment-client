@@ -5,8 +5,8 @@ import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 const RegisterPage = () => {
-  const { createUser } = useContext(AuthContext);
-  const navegat = useNavigate();
+  const { createUser, signInWithGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleRegister = (event) => {
     event.preventDefault();
     const from = event.target;
@@ -44,28 +44,25 @@ const RegisterPage = () => {
             console.log(data);
           });
         console.log(result.user);
-        navegat("/");
+        navigate("/");
         Swal.fire("Create Account success", "", "success");
       })
       .catch((error) => console.error(error));
   };
 
-  // const handleRegister = (event) => {
-  //   event.preventDefault();
-  //   const form = event.target;
-  //   const name = form.name.value;
-  //   const email = form.email.value;
-  //   const password = form.password.value;
-  //   console.log(name, email, password);
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        result.user;
 
-  //   createUser(email, password)
-  //     .then((result) => {
-  //       const user = result.user;
-  //       console.log("created user", user);
-  //       Swal.fire("Register Success", "success");
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
+        navigate(location?.state ? location?.state : "/");
+        Swal.fire("You are Logedin", "", "success");
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire(error);
+      });
+  };
 
   return (
     <div className="flex my-5">
@@ -76,7 +73,10 @@ const RegisterPage = () => {
             <form onSubmit={handleRegister} className="card-body w-full">
               <div className="form-control w-full">
                 <h1 className="text-5xl font-bold mb-6">Register</h1>
-                <div className="w-full border bordered btn badge-ghost mb-3 px-2 py-3 rounded-lg flex justify-center items-center text-center">
+                <div
+                  onClick={handleGoogleSignIn}
+                  className="w-full border bordered btn badge-ghost mb-3 px-2 py-3 rounded-lg flex justify-center items-center text-center"
+                >
                   <FcGoogle></FcGoogle>
                   <h3>Google Login</h3>
                 </div>

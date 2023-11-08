@@ -9,6 +9,7 @@ import {
   signOut,
 } from "firebase/auth";
 import app from "../Firebase/Firebase.confiq";
+import axios from "axios";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -42,16 +43,16 @@ const AuthProvider = ({ children }) => {
       // console.log("current user", currentUser);
       setLoading(false);
 
-      // if (currentUser) {
-      //   const loggedUser = { email: currentUser.email };
-      //   axios
-      //     .post("http://localhost:5000/jwt", loggedUser, {
-      //       withCredentials: true,
-      //     })
-      //     .then((res) => {
-      //       console.log("token responce", res.data);
-      //     });
-      // }
+      if (currentUser) {
+        const loggedUser = { email: currentUser.email };
+        axios
+          .post("http://localhost:5000/jwt", loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log("token responce", res.data);
+          });
+      }
     });
     return () => {
       return unsubscribe();

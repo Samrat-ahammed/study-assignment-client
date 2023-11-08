@@ -57,10 +57,6 @@ const Navbar = () => {
           <li>
             <Link to={"/allSubmit"}>submitted-assignments</Link>
           </li>
-
-          <li onClick={handleLogOut}>
-            <Link>Log Out</Link>
-          </li>
         </>
       ) : (
         <li>
@@ -89,20 +85,6 @@ const Navbar = () => {
           </li>
         </ul>
       </li>
-
-      {/* <li>
-        <NavLink to={"allSubmit"}>
-          <a>submitted-assignments</a>
-        </NavLink>
-      </li> */}
-
-      {/* {!user ? (
-        <li>
-          <NavLink to={"/login"}>Login</NavLink>
-        </li>
-      ) : (
-        <li onClick={handleLogOut}>Logout</li>
-      )} */}
     </>
   );
 
@@ -146,17 +128,28 @@ const Navbar = () => {
             {navLink}
           </ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end space-x-4">
+          {user?.email ? (
+            <h3 onClick={handleLogOut} className="btn badge-primary ml-2 ">
+              Logout
+            </h3>
+          ) : (
+            <Link to={"/login"} className="btn badge-primary ml-2 ">
+              Login
+            </Link>
+          )}
           <div className="dropdown dropdown-left">
-            <label
-              tabIndex={0}
-              className="btn hover:bg-slate-100 m-1 h-[50px]  rounded-full"
-            >
-              <img
-                className="h-full rounded-full"
-                src={!user?.email ? profileLogo : user?.photoURL}
-                alt=""
-              />
+            <label tabIndex={0} className="hover:bg-slate-100 m-1 rounded-full">
+              <a
+                className="tooltip tooltip-bottom"
+                data-tip={user?.displayName}
+              >
+                <img
+                  className="w-14 rounded-full ${}"
+                  src={!user?.email ? profileLogo : user?.photoURL}
+                  alt=""
+                />
+              </a>
             </label>
             <ul
               tabIndex={0}
@@ -170,9 +163,15 @@ const Navbar = () => {
                 ""
               )}
               {user?.email ? (
-                <li onClick={handleLogOut}>
-                  <a>Logout</a>
-                </li>
+                <>
+                  {" "}
+                  <li>
+                    <a>{user.displayName}</a>
+                  </li>
+                  <li onClick={handleLogOut}>
+                    <a>Logout</a>
+                  </li>
+                </>
               ) : (
                 <li>
                   <Link to={"/login"}>Login</Link>
