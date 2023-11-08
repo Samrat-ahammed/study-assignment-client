@@ -11,7 +11,7 @@ const AllAssignment = () => {
 
   useEffect(() => {
     fetch(
-      `https://study-assignment-server.vercel.app/allAssignment?email=${user?.email}&level=${level}`
+      `https://study-assignment-server.vercel.app?email=${user?.email}&level=${level}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -31,12 +31,9 @@ const AllAssignment = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result?.isConfirmed) {
-        fetch(
-          `https://study-assignment-server.vercel.app/allAssignment/${_id}`,
-          {
-            method: "DELETE",
-          }
-        )
+        fetch(`https://study-assignment-server.vercel.app/${_id}`, {
+          method: "DELETE",
+        })
           .then((res) => res.json())
           .then((data) => {
             console.log(data);

@@ -24,16 +24,13 @@ const UpdateAssignment = () => {
 
   const handleUpdateAssignment = (e) => {
     e.preventDefault();
-    fetch(
-      `https://study-assignment-server.vercel.app/allAssignment/${assignment._id}`,
-      {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(addAssignment),
-      }
-    )
+    fetch(`https://study-assignment-server.vercel.app/${assignment._id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(addAssignment),
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

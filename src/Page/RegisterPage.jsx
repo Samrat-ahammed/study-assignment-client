@@ -12,8 +12,6 @@ const RegisterPage = () => {
     const from = event.target;
     const email = from.email.value;
     const password = from.password.value;
-    const imgUrl = from.imgUrl.value;
-    const name = from.name.value;
 
     console.log(email, password);
 
@@ -28,26 +26,13 @@ const RegisterPage = () => {
 
     createUser(email, password)
       .then((result) => {
-        const user = { email, name, imgUrl };
-        fetch("https://study-assignment-server.vercel.app/user", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(user),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.insertedId) {
-              Swal.fire("User Created", "", "success");
-            }
-            console.log(data);
-          });
-        console.log(result.user);
+        result.user;
         navigate("/");
-        Swal.fire("Create Account success", "", "success");
+        Swal.fire("register success,", "", "success");
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleGoogleSignIn = () => {

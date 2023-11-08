@@ -20,14 +20,11 @@ const AllSubmit = () => {
   }, []);
 
   const handleGiveMark = () => {
-    fetch(
-      `https://study-assignment-server.vercel.app/takeAssignment/${updatedId}`,
-      {
-        method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(addAssignment),
-      }
-    ).then(() => {
+    fetch(`https://study-assignment-server.vercel.app/${updatedId}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(addAssignment),
+    }).then(() => {
       getPendingAssignment();
     });
   };

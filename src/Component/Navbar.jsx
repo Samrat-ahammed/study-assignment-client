@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  const [profile, setProfile] = useState([]);
+  // const [profile, setProfile] = useState([]);
 
   const handleLogOut = () => {
     logOut()
@@ -15,14 +15,14 @@ const Navbar = () => {
       .catch((error) => console.log(error));
   };
 
-  useEffect(() => {
-    fetch("https://study-assignment-server.vercel.app/user")
-      .then((res) => res.json())
-      .then((data) => {
-        setProfile(data);
-        console.log(data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/user")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setProfile(data);
+  //       console.log(data);
+  //     });
+  // }, []);
 
   const navLink = (
     <>
