@@ -15,15 +15,6 @@ const Navbar = () => {
       .catch((error) => console.log(error));
   };
 
-  // useEffect(() => {
-  //   fetch("http://localhost:5000/user")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setProfile(data);
-  //       console.log(data);
-  //     });
-  // }, []);
-
   const navLink = (
     <>
       <li>

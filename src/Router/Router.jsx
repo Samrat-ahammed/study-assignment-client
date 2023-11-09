@@ -22,7 +22,8 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage></HomePage>,
-        loader: () => fetch("https://study-assignment-server.vercel.app"),
+        loader: () =>
+          fetch("https://study-assignment-server.vercel.app/allAssignment"),
       },
       {
         path: "assignmentDetails/:id",
@@ -32,7 +33,9 @@ const router = createBrowserRouter([
           </PrivetRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://study-assignment-server.vercel.app/${params.id}`),
+          fetch(
+            `https://study-assignment-server.vercel.app/allAssignment/${params.id}`
+          ),
       },
       {
         path: "/addAssignment",
@@ -51,7 +54,9 @@ const router = createBrowserRouter([
           </PrivetRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://study-assignment-server.vercel.app/${params.id}`),
+          fetch(
+            `https://study-assignment-server.vercel.app/allAssignment/${params.id}`
+          ),
       },
       {
         path: "/myAssignment",
@@ -60,7 +65,8 @@ const router = createBrowserRouter([
       {
         path: "/allAssignment",
         element: <AllAssignment></AllAssignment>,
-        loader: () => fetch("https://study-assignment-server.vercel.app"),
+        loader: () =>
+          fetch("https://study-assignment-server.vercel.app/allAssignment"),
       },
       {
         path: "/allSubmit",

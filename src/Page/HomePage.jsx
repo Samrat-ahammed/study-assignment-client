@@ -8,6 +8,7 @@ import HomeAboutSec from "../Component/HomeAboutSec";
 
 const HomePage = () => {
   const assignment = useLoaderData();
+
   const [slider, setSlider] = useState([]);
 
   useEffect(() => {
@@ -30,9 +31,10 @@ const HomePage = () => {
           Assignment
         </h1>
         <div className="grid grid-cols-a gap-5 mb-5 mt-5 md:grid-cols-2 lg:grid-cols-4">
-          {assignment?.map((item) => (
-            <Card key={item?._id} item={item}></Card>
-          ))}
+          {assignment?.length > 0 &&
+            assignment?.map((item) => (
+              <Card key={item?._id} item={item}></Card>
+            ))}
         </div>
       </div>
       {/* Home About ...  */}

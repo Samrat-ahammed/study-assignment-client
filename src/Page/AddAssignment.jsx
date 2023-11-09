@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
-import { BiMessageSquareAdd } from "react-icons/Bi";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
@@ -19,7 +18,7 @@ const AddAssignment = () => {
 
   const handleAddAssignment = (e) => {
     e.preventDefault();
-    fetch("https://study-assignment-server.vercel.app", {
+    fetch("https://study-assignment-server.vercel.app/allAssignment", {
       method: "Post",
       headers: {
         "content-type": "application/json",

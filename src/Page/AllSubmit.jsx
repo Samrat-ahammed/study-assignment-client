@@ -20,26 +20,31 @@ const AllSubmit = () => {
   }, []);
 
   const handleGiveMark = () => {
-    fetch(`https://study-assignment-server.vercel.app/${updatedId}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(addAssignment),
-    }).then(() => {
+    fetch(
+      `https://study-assignment-server.vercel.app/takeAssignment/${updatedId}`,
+      {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(addAssignment),
+      }
+    ).then(() => {
       getPendingAssignment();
     });
   };
 
-  const url = `https://study-assignment-server.vercel.app/takeAssignment?email=${user?.email}`;
+  // const url = `https://study-assignment-server.vercel.app/takeAssignment?email=${user?.email}`;
 
   const getPendingAssignment = () => {
-    axios.get(url, { withCredentials: true }).then((res) => {
-      setPendingAssign(res.data);
-    });
-    // fetch(`https://study-assignment-server.vercel.app/takeAssignment?email=${user?.email}`,)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setPendingAssign(data);
-    //   });
+    // axios.get(url, { withCredentials: true }).then((res) => {
+    //   setPendingAssign(res.data);
+    // });
+    fetch(
+      `https://study-assignment-server.vercel.app/takeAssignment?email=${user?.email}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setPendingAssign(data);
+      });
   };
 
   return (
@@ -58,7 +63,7 @@ const AllSubmit = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              {pendingAssign &&
+              {pendingAssign.length > 0 &&
                 pendingAssign?.map((item) => (
                   <tr key={item._id} className="p-10 m-10">
                     <td className="py-5">{item?.title}</td>

@@ -11,7 +11,7 @@ const AllAssignment = () => {
 
   useEffect(() => {
     fetch(
-      `https://study-assignment-server.vercel.app?email=${user?.email}&level=${level}`
+      `https://study-assignment-server.vercel.app/allAssignment?level=${level}`
     )
       .then((res) => res.json())
       .then((data) => {

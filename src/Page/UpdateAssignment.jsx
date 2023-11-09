@@ -19,18 +19,21 @@ const UpdateAssignment = () => {
     description: "",
     imgUrl: "",
     level: "",
-    date: new Date(),
+    date: new Date(assignment.date),
   });
 
   const handleUpdateAssignment = (e) => {
     e.preventDefault();
-    fetch(`https://study-assignment-server.vercel.app/${assignment._id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(addAssignment),
-    })
+    fetch(
+      `https://study-assignment-server.vercel.app/allAssignment${assignment._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(addAssignment),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -42,8 +45,9 @@ const UpdateAssignment = () => {
 
   useEffect(() => {
     if (assignment) {
-      setAssignment({ ...assignment, date: new Date(assignment.date) });
+      setAssignment({ ...assignment, date: new Date() });
     }
+    // console.log(assignment?.date);
   }, [assignment]);
   return (
     <form onSubmit={handleUpdateAssignment} className="mb-10 mt-10">
