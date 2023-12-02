@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
-import axios from "axios";
 
 const AllSubmit = () => {
   const { user } = useContext(AuthContext);
@@ -8,6 +7,14 @@ const AllSubmit = () => {
   const [updatedId, setUpdatedId] = useState("");
 
   console.log(pendingAssign);
+  const getPendingAssignment = () => {
+    fetch(`http://localhost:5000/takeAssignment?email=${user.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setPendingAssign(data);
+        console.log(data);
+      });
+  };
 
   const [addAssignment, setAssignment] =
     useState({
@@ -20,31 +27,13 @@ const AllSubmit = () => {
   }, []);
 
   const handleGiveMark = () => {
-    fetch(
-      `https://study-assignment-server.vercel.app/takeAssignment/${updatedId}`,
-      {
-        method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(addAssignment),
-      }
-    ).then(() => {
+    fetch(`http://localhost:5000/takeAssignment/${updatedId}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(addAssignment),
+    }).then(() => {
       getPendingAssignment();
     });
-  };
-
-  // const url = `https://study-assignment-server.vercel.app/takeAssignment?email=${user?.email}`;
-
-  const getPendingAssignment = () => {
-    // axios.get(url, { withCredentials: true }).then((res) => {
-    //   setPendingAssign(res.data);
-    // });
-    fetch(
-      `https://study-assignment-server.vercel.app/takeAssignment?email=${user?.email}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setPendingAssign(data);
-      });
   };
 
   return (

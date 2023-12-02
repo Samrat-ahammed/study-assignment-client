@@ -2,6 +2,7 @@
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const AllAssignment = () => {
   //   const assignment = useLoaderData();
@@ -20,34 +21,37 @@ const AllAssignment = () => {
       });
   }, [user, level]);
 
-  const handleDelete = (_id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result?.isConfirmed) {
-        fetch(`https://study-assignment-server.vercel.app/${_id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            if (data?.deletedCount > 0) {
-              // eslint-disable-next-line react/prop-types
-              const remaining = addProduct.filter((item) => item._id !== _id);
-              console.log(remaining);
-              setAddProduct(remaining);
-              Swal.fire("Deleted!", "Your file has been deleted.", "success");
-            }
-          });
-      }
-    });
-  };
+  // const handleDelete = (_id) => {
+  //   Swal.fire({
+  //     title: "Are you sure?",
+  //     text: "You won't be able to revert this!",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#3085d6",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Yes, delete it!",
+  //   }).then((result) => {
+  //     if (result?.isConfirmed) {
+  //       fetch(
+  //         `https://study-assignment-server.vercel.app/allAssignment/${_id}`,
+  //         {
+  //           method: "DELETE",
+  //         }
+  //       )
+  //         .then((res) => res.json())
+  //         .then((data) => {
+  //           console.log(data);
+  //           if (data?.deletedCount > 0) {
+  //             // eslint-disable-next-line react/prop-types
+  //             const remaining = addProduct.filter((item) => item._id !== _id);
+  //             console.log(remaining);
+  //             setAddProduct(remaining);
+  //             Swal.fire("Deleted!", "Your file has been deleted.", "success");
+  //           }
+  //         });
+  //     }
+  //   });
+  // };
 
   return (
     <div>
@@ -96,12 +100,12 @@ const AllAssignment = () => {
                 <p className="badge badge-outline">status: {item?.status}</p>
               </div>
               <div className="card-actions justify-end">
-                <button
-                  onClick={() => handleDelete(item?._id)}
+                <Link
+                  to={`/assignmentDetails/${item._id}`}
                   className="btn btn-primary"
                 >
-                  delete
-                </button>
+                  Views
+                </Link>
               </div>
             </div>
           </div>

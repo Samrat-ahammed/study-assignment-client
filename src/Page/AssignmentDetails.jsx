@@ -19,7 +19,7 @@ const AssignmentDetails = () => {
   });
 
   const handleTakeAssignment = () => {
-    fetch("https://study-assignment-server.vercel.app/takeAssignment", {
+    fetch("http://localhost:5000/takeAssignment", {
       method: "Post",
       headers: {
         "content-type": "application/json",

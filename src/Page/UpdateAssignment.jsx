@@ -25,7 +25,7 @@ const UpdateAssignment = () => {
   const handleUpdateAssignment = (e) => {
     e.preventDefault();
     fetch(
-      `https://study-assignment-server.vercel.app/allAssignment${assignment._id}`,
+      `https://study-assignment-server.vercel.app/allAssignment/${assignment._id}`,
       {
         method: "PUT",
         headers: {

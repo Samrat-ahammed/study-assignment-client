@@ -6,24 +6,19 @@ const MyAllAssignment = () => {
   const [addProduct, setAddProduct] = useState([]);
 
   const { user } = useContext(AuthContext);
-  console.log(user?.email);
 
-  const url = `https://study-assignment-server.vercel.app/takeAssignment?email=${user?.email}`;
+  const url = `http://localhost:5000/takeAssignment?email=${user?.email}`;
   useEffect(() => {
-    // if (user?.email) {
-    // axios
-    //   .get(url, { withCredentials: true })
-    //   .then((res) => setAddProduct(res.data));
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         setAddProduct(data);
         console.log(data);
       });
-    // }
   }, [url]);
 
   const handleDelete = (_id) => {
+    console.log(_id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -34,12 +29,9 @@ const MyAllAssignment = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result?.isConfirmed) {
-        fetch(
-          `https://study-assignment-server.vercel.app/takeAssignment/${_id}`,
-          {
-            method: "DELETE",
-          }
-        )
+        fetch(`http://localhost:5000/takeAssignment/${_id}`, {
+          method: "DELETE",
+        })
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -49,6 +41,8 @@ const MyAllAssignment = () => {
               console.log(remaining);
               setAddProduct(remaining);
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            } else {
+              Swal.fire("Not delete", "error");
             }
           });
       }
@@ -57,7 +51,7 @@ const MyAllAssignment = () => {
 
   return (
     <div className="grid grid-cols-a gap-5 mb-5 mt-5 md:grid-cols-2 lg:grid-cols-4">
-      {addProduct.length > 0 && addProduct.length > 0 ? (
+      {addProduct.length > 0 ? (
         addProduct?.map((item) => (
           <div key={item._id} className="card bg-base-100 shadow-xl">
             <figure className="px-10 pt-10 h-40">
