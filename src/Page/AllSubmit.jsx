@@ -5,16 +5,7 @@ const AllSubmit = () => {
   const { user } = useContext(AuthContext);
   const [pendingAssign, setPendingAssign] = useState([]);
   const [updatedId, setUpdatedId] = useState("");
-
-  console.log(pendingAssign);
-  const getPendingAssignment = () => {
-    fetch(`http://localhost:5000/takeAssignment?email=${user.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setPendingAssign(data);
-        console.log(data);
-      });
-  };
+  const [reload, isReload] = useState(false);
 
   const [addAssignment, setAssignment] =
     useState({
@@ -23,8 +14,22 @@ const AllSubmit = () => {
     }) || {};
 
   useEffect(() => {
-    getPendingAssignment();
-  }, []);
+    const getPendingAssignment = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/takeAssignment?email=${user?.email}`
+        );
+        const data = await response.json();
+        setPendingAssign(data);
+        console.log(data[0].pdf);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    if (user?.email) {
+      getPendingAssignment();
+    }
+  }, [user, reload]);
 
   const handleGiveMark = () => {
     fetch(`http://localhost:5000/takeAssignment/${updatedId}`, {
@@ -32,7 +37,8 @@ const AllSubmit = () => {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(addAssignment),
     }).then(() => {
-      getPendingAssignment();
+      // getPendingAssignment();
+      isReload(!reload);
     });
   };
 

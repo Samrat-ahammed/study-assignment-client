@@ -1,8 +1,8 @@
-# React + Vite
+## Our website features
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- In our website build for the students group study and exam and assignment submission
+- On the website first home page you can see some simple card for students
+- Then you can see teachers, awards, etc.
+- on the website button you show footer section and you can contact with us for join our website and update and study with us
+- you can see on Assignment page all the assignment students submitted but you can not update and delete any assignment .
+- only user can delete
