@@ -23,7 +23,9 @@ const router = createBrowserRouter([
         path: "/",
         element: <HomePage></HomePage>,
         loader: () =>
-          fetch("https://study-assignment-server.vercel.app/allAssignment"),
+          fetch(
+            "https://study-assignment-server.vercel.app/allAssignmentCount"
+          ),
       },
       {
         path: "assignmentDetails/:id",

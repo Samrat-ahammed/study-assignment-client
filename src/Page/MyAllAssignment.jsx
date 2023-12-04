@@ -7,7 +7,7 @@ const MyAllAssignment = () => {
 
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/takeAssignment?email=${user?.email}`;
+  const url = `https://study-assignment-server.vercel.app/takeAssignment?email=${user?.email}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -29,9 +29,12 @@ const MyAllAssignment = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result?.isConfirmed) {
-        fetch(`http://localhost:5000/takeAssignment/${_id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://study-assignment-server.vercel.app/takeAssignment/${_id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);

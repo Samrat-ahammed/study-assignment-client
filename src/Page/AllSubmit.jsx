@@ -17,7 +17,7 @@ const AllSubmit = () => {
     const getPendingAssignment = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/takeAssignment?email=${user?.email}`
+          `https://study-assignment-server.vercel.app/takeAssignment?email=${user?.email}`
         );
         const data = await response.json();
         setPendingAssign(data);
@@ -32,11 +32,14 @@ const AllSubmit = () => {
   }, [user, reload]);
 
   const handleGiveMark = () => {
-    fetch(`http://localhost:5000/takeAssignment/${updatedId}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(addAssignment),
-    }).then(() => {
+    fetch(
+      `https://study-assignment-server.vercel.app/takeAssignment/${updatedId}`,
+      {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(addAssignment),
+      }
+    ).then(() => {
       // getPendingAssignment();
       isReload(!reload);
     });
