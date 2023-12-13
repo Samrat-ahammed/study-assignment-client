@@ -13,6 +13,7 @@ import MyAllAssignment from "../Page/MyAllAssignment";
 import Faq from "../Page/Faq";
 import FeatureSection from "../Page/FeatureSection";
 import ErrorPage from "../Page/ErrorPage";
+import PlayVideoPage from "../Page/PlayVideoPage";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "/feature",
         element: <FeatureSection></FeatureSection>,
+      },
+      {
+        path: "/videoPage",
+        element: <PlayVideoPage></PlayVideoPage>,
       },
       {
         path: "*",

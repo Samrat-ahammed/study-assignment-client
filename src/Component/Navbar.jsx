@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import navbarLogo from "../assets/navbarlogo.png";
 import profileLogo from "../assets/profileLogo.svg";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 
@@ -64,6 +64,11 @@ const Navbar = () => {
           <li>
             <NavLink to={"feature"}>
               <a>Feature</a>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"videoPage"}>
+              <a>Paly Video</a>
             </NavLink>
           </li>
         </ul>
